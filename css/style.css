@@ -1,0 +1,64 @@
+td
+    {
+    width: 50px;
+    height: 30px;
+    border: 1px solid gray;
+    }
+
+.EntryInput
+    {
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    }
+
+
+table
+    {
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+
+
+    /* set a different color for the border separating the sub-grids (first digit is line, second is column) */
+
+    /* top of table */
+#td00, #td01, #td02, #td03, #td04, #td05, #td06, #td07, #td08
+    {
+    border-top: 3px solid blueviolet;
+    }
+
+    /* bottom of table */
+#td80, #td81, #td82, #td83, #td84, #td85, #td86, #td87, #td88
+    {
+    border-bottom: 3px solid blueviolet;
+    }
+
+    /* left of table */
+#td00, #td10, #td20, #td30, #td40, #td50, #td60, #td70, #td80
+    {
+    border-left: 3px solid blueviolet;
+    }
+
+    /* right of table */
+#td08, #td18, #td28, #td38, #td48, #td58, #td68, #td78, #td88
+    {
+    border-right: 3px solid blueviolet;
+    }
+
+    /* inner vertical */
+#td03, #td13, #td23, #td33, #td43, #td53, #td63, #td73, #td83,
+#td06, #td16, #td26, #td36, #td46, #td56, #td66, #td76, #td86
+    {
+    border-left: 3px solid blueviolet;
+    }
+
+    /* inner horizontal */
+#td20, #td21, #td22, #td23, #td24, #td25, #td26, #td27, #td28,
+#td50, #td51, #td52, #td53, #td54, #td55, #td56, #td57, #td58
+    {
+    border-bottom: 3px solid blueviolet;
+    }
