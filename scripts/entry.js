@@ -13,13 +13,13 @@ input.addEventListener( 'focus', function( event )
     {
     _this.savePreviousValue( event );
 
-    removeErrorsHighlight();
+    Sudoku.removeErrorsHighlight();
     }, false );
 input.addEventListener( 'blur', function( event )
     {
     _this.validateInput( event );
 
-    removeErrorsHighlight();
+    Sudoku.removeErrorsHighlight();
     }, false );
 
 container.appendChild( input );
@@ -81,15 +81,24 @@ Entry.prototype.validateInput = function( event )
 {
 var value = parseInt( this.input.value, 10 );
 
-if ( _.isNumber( value ) &&
-     !_.isNaN( value ) &&
-     value >= 1 &&
-     value <= 9 )
+if ( !_.isNaN( value ) )
     {
-    return true;
+    if ( value >= 1 && value <= 9 )
+        {
+        return true;
+        }
+
+    else
+        {
+        this.input.value = this.previous_value;
+        }
     }
 
-this.input.value = this.previous_value;
+else
+    {
+    this.input.value = '';
+    }
+
 return false;
 };
 
