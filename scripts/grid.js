@@ -88,10 +88,19 @@ Grid.getEntry = function( column, line )
 return GRID[ line ][ column ];
 };
 
-Grid.setValue = function( column, line, value )
+Grid.setValue = function( column, line, value, readOnly )
 {
+if ( typeof readOnly === 'undefined' )
+    {
+    readOnly = false;
+    }
+
 GRID_VALUE[ line ][ column ] = value;
-GRID[ line ][ column ].setValue( value );
+
+var entry = GRID[ line ][ column ];
+
+entry.setValue( value );
+entry.setReadOnly( readOnly );
 };
 
 Grid.getValue = function( column, line )

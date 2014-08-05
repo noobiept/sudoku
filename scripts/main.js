@@ -126,7 +126,7 @@ for (var a = 0 ; a < howMany ; a++)
     var index = getRandomInt( 0, validDigits.length - 1 );
     var digit = validDigits[ index ];
 
-    Grid.setValue( position.column, position.line, digit );
+    Grid.setValue( position.column, position.line, digit, true );
     }
 
     // check if its valid
