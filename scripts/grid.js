@@ -137,6 +137,23 @@ for (var line = 0 ; line < GRID_SIZE ; line++)
     }
 };
 
+Grid.reset = function()
+{
+for (var line = 0 ; line < GRID_SIZE ; line++)
+    {
+    for (var column = 0 ; column < GRID_SIZE ; column++)
+        {
+        var entry = GRID[ line ][ column ];
+
+        if ( !entry.isReadOnly() )
+            {
+            GRID_VALUE[ line ][ column ] = 0;
+            entry.reset();
+            }
+        }
+    }
+};
+
 
 window.Grid = Grid;
 

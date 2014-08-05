@@ -10,9 +10,11 @@ Menu.init();
 generateMap();
 };
 
+var ERRORS_HIGHLIGHTED = false;
+
 
 /*
-    Checks if there's any mistake so far
+    Checks if there's any mistake so far, and highlights the entries with mistakes
 
     To be valid, each column/line/sub-grid has to have only of of the digits
  */
@@ -20,48 +22,66 @@ generateMap();
 function isValidSoFar()
 {
 var size = 9;
+var isValid = true;
+
+    // will be used to tell if there's a repeating digit
+    // key is the digit (number 1-9)
+    // value is a Entry reference to the previous found
+var digitsFound = {};
+var column = 0;
+var line = 0;
+var entry;
+var value;
 
     // check the columns
-for (var column = 0 ; column < size ; column++)
+for (column = 0 ; column < size ; column++)
     {
-    var digitsFound = {};
+        // need to reset it for every check
+    digitsFound = {};
 
-    for (var line = 0 ; line < size ; line++)
+    for (line = 0 ; line < size ; line++)
         {
-        var entry = Grid.getEntry( column, line );
-        var value = entry.getValue();
+        entry = Grid.getEntry( column, line );
+        value = entry.getValue();
 
         if ( !_.isNaN( value ) )
             {
             if ( digitsFound[ value ] )
                 {
-                return false;
+                    // mark the previous entry as well
+                digitsFound[ value ].setValid( false );
+                entry.setValid( false );
+
+                isValid = false;
                 }
 
-            digitsFound[ value ] = true;
+            digitsFound[ value ] = entry;
             }
         }
     }
 
 
     // check the lines
-for (var line = 0 ; line < size ; line++)
+for (line = 0 ; line < size ; line++)
     {
-    var digitsFound = {};
+    digitsFound = {};
 
-    for (var column = 0 ; column < size ; column++)
+    for (column = 0 ; column < size ; column++)
         {
-        var entry = Grid.getEntry( column, line );
-        var value = entry.getValue();
+        entry = Grid.getEntry( column, line );
+        value = entry.getValue();
 
         if ( !_.isNaN( value ) )
             {
             if ( digitsFound[ value ] )
                 {
-                return false;
+                digitsFound[ value ].setValid( false );
+                entry.setValid( false );
+
+                isValid = false;
                 }
 
-            digitsFound[ value ] = true;
+            digitsFound[ value ] = entry;
             }
         }
     }
@@ -78,29 +98,71 @@ while( subGrid !== null )
 
     for (var a = 0 ; a < subGrid.length ; a++)
         {
-        var entry = subGrid[ a ];
-        var value = entry.getValue();
+        entry = subGrid[ a ];
+        value = entry.getValue();
 
         if ( !_.isNaN( value ) )
             {
             if ( digitsFound[ value ] )
                 {
-                return false;
+                digitsFound[ value ].setValid( false );
+                entry.setValid( false );
+
+                isValid = false;
                 }
 
-            digitsFound[ value ] = true;
+            digitsFound[ value ] = entry;
             }
         }
 
     subGrid = getNextSubGrid();
     }
 
-return true;
+
+if ( !isValid )
+    {
+    ERRORS_HIGHLIGHTED = true;
+    }
+
+return isValid;
 }
+
+
+function removeErrorsHighlight()
+{
+if ( !ERRORS_HIGHLIGHTED )
+    {
+    return;
+    }
+
+var size = Grid.getSize();
+
+for (var line = 0 ; line < size ; line++)
+    {
+    for (var column = 0 ; column < size ; column++)
+        {
+        var entry = Grid.getEntry( column, line );
+
+        entry.setValid( true );
+        }
+    }
+
+ERRORS_HIGHLIGHTED = false;
+}
+
 
 function clearMap()
 {
 Grid.clear();
+}
+
+/*
+    Difference between clearMap and resetMap is that resetMap will keep the initial given digits
+ */
+
+function resetMap()
+{
+Grid.reset();
 }
 
 

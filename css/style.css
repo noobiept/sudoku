@@ -73,4 +73,30 @@ table
 .button
     {
     cursor: pointer;
+    border-bottom: 1px solid darkred;
+    }
+
+.button:hover
+    {
+    color: darkred;
+    font-weight: bold;
+    }
+
+#Menu
+    {
+    list-style-type: none;
+    display: inline-block;
+    margin: 20px;
+    padding: 0;
+    }
+
+#Menu > *
+    {
+    display: inline-block;
+    padding: 0 10px;
+    }
+
+.errorValue
+    {
+    background-color: lightcoral;
     }

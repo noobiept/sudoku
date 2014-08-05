@@ -9,13 +9,25 @@ input.type = 'number';
 input.min = 1;
 input.max = 9;
 input.className = 'EntryInput';
-input.addEventListener( 'focus', function( event ) { _this.savePreviousValue( event ) } );
-input.addEventListener( 'blur', function( event ) { _this.validateInput( event ) }, false );
+input.addEventListener( 'focus', function( event )
+    {
+    _this.savePreviousValue( event );
+
+    removeErrorsHighlight();
+    }, false );
+input.addEventListener( 'blur', function( event )
+    {
+    _this.validateInput( event );
+
+    removeErrorsHighlight();
+    }, false );
 
 container.appendChild( input );
 
 this.previous_value = '';
 this.input = input;
+this.container = container;
+this.is_read_only = false;
 }
 
 /*
@@ -40,13 +52,21 @@ if ( yesNo === true )
     {
     this.input.classList.add( 'givenDigits' );
     this.input.setAttribute( 'readonly', 'readonly' );
+    this.is_read_only = true;
     }
 
 else
     {
     this.input.classList.remove( 'givenDigits' );
     this.input.removeAttribute( 'readonly' );
+    this.is_read_only = false;
     }
+};
+
+
+Entry.prototype.isReadOnly = function()
+{
+return this.is_read_only;
 };
 
 
@@ -76,8 +96,25 @@ return false;
 
 Entry.prototype.reset = function()
 {
+this.setReadOnly( false );
 this.input.value = '';
 this.previous_value = '';
+};
+
+
+Entry.prototype.setValid = function( yesNo )
+{
+if ( yesNo === false )
+    {
+    this.container.classList.add( 'errorValue' );
+    this.input.classList.add( 'errorValue' );
+    }
+
+else
+    {
+    this.container.classList.remove( 'errorValue' );
+    this.input.classList.remove( 'errorValue' );
+    }
 };
 
 
