@@ -18,6 +18,7 @@ var newMap = container.querySelector( '#Menu-newMap' );
 
 newMap.onclick = function()
     {
+    Timer.restart();
     Sudoku.generateMap();
     };
 
@@ -26,6 +27,7 @@ var resetMap = container.querySelector( '#Menu-resetMap' );
 
 resetMap.onclick = function()
     {
+    Timer.restart();
     Sudoku.resetMap();
     };
 
@@ -57,9 +59,7 @@ validateMap.onclick = function()
     };
 
     // message
-var message = container.querySelector( '#Menu-message' );
-
-MESSAGE = message;
+MESSAGE = container.querySelector( '#Menu-message' );
 };
 
 

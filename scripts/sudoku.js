@@ -182,7 +182,7 @@ for (var line = 0 ; line < size ; line++)
         }
     }
 
-var howMany = 5;
+var howMany = 25;
 var selectedPositions = severalRandomInts( 0, positions.length - 1, howMany );
 var grid = Grid.getGridValue();
 
