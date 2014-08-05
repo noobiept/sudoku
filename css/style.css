@@ -69,3 +69,8 @@ table
     color: brown;
     font-weight: bold;
     }
+
+.button
+    {
+    cursor: pointer;
+    }

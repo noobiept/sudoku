@@ -5,6 +5,7 @@
 window.onload = function()
 {
 Grid.init();
+Menu.init();
 
 generateMap();
 };
@@ -97,9 +98,17 @@ while( subGrid !== null )
 return true;
 }
 
+function clearMap()
+{
+Grid.clear();
+}
+
+
 
 function generateMap()
 {
+clearMap();
+
 var size = Grid.getSize();
 var positions = [];
 

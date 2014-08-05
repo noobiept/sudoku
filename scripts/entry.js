@@ -74,6 +74,13 @@ return false;
 };
 
 
+Entry.prototype.reset = function()
+{
+this.input.value = '';
+this.previous_value = '';
+};
+
+
 window.Entry = Entry;
 
 }(window));
