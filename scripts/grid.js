@@ -5,7 +5,8 @@ function Grid()
 
 }
 
-var GRID = [];
+var GRID = [];          // grid with the entries
+var GRID_VALUE = [];    // grid with just the value
 var GRID_SIZE = 9;
 
 Grid.init = function()
@@ -17,6 +18,7 @@ var container = document.createElement( 'table' );
 for (var line = 0 ; line < size ; line++)
     {
     GRID[ line ] = [];
+    GRID_VALUE[ line ] = [];
     var row = document.createElement( 'tr' );
 
     for (var column = 0 ; column < size ; column++)
@@ -26,6 +28,7 @@ for (var line = 0 ; line < size ; line++)
         td.id = 'td' + line + column;
 
         GRID[ line ][ column ] = new Entry( td );
+        GRID_VALUE[ line ][ column ] = 0;
 
         row.appendChild( td );
         }
@@ -85,6 +88,29 @@ Grid.getEntry = function( column, line )
 return GRID[ line ][ column ];
 };
 
+Grid.setValue = function( column, line, value )
+{
+GRID_VALUE[ line ][ column ] = value;
+GRID[ line ][ column ].setValue( value );
+};
+
+Grid.getValue = function( column, line )
+{
+return GRID_VALUE[ line ][ column ];
+};
+
+
+
+Grid.getSize = function()
+{
+return GRID_SIZE;
+};
+
+
+Grid.getGridValue = function()
+{
+return GRID_VALUE;
+};
 
 
 window.Grid = Grid;

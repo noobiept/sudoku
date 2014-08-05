@@ -24,6 +24,12 @@ return parseInt( this.input.value, 10 );
 };
 
 
+Entry.prototype.setValue = function( value )
+{
+this.input.value = value;
+};
+
+
 window.Entry = Entry;
 
 }(window));
