@@ -122,6 +122,41 @@ return GRID_VALUE;
 };
 
 
+/*
+    format:
+        a single string line, with the digits, and with empty/invalid values as a . (dot)
+    example:
+        '38..9...7....15...5297...3...74....3.931.654.2....37...4...7985...95....9...4..76'
+ */
+
+Grid.getGridString = function()
+{
+var grid = '';
+
+for (var line = 0 ; line < GRID_SIZE ; line++)
+    {
+    for (var column = 0 ; column < GRID_SIZE ; column++)
+        {
+        var entry = GRID[ line ][ column ];
+        var value = entry.getValue();
+
+        if ( _.isNaN( value ) )
+            {
+            grid += '.';
+            }
+
+        else
+            {
+            grid += value;
+            }
+        }
+    }
+
+return grid;
+};
+
+
+
 Grid.clear = function()
 {
 for (var line = 0 ; line < GRID_SIZE ; line++)

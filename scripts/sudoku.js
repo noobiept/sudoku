@@ -163,6 +163,39 @@ Grid.reset();
 };
 
 
+Sudoku.openMap = function()
+{
+var map = '38..9...7....15...5297...3...74....3.931.654.2....37...4...7985...95....9...4..76';
+
+
+var isValid = Solver.isValid( map );
+
+if ( isValid === false )
+    {
+    console.log( 'Not solvable.' );
+    }
+
+else
+    {
+    console.log( 'Solvable.' );
+    }
+
+for (var a = 0 ; a < map.length ; a++)
+    {
+    var digit = parseInt( map[ a ], 10 );
+
+    if ( !_.isNaN( digit ) )
+        {
+        var line = Math.floor( a / 9 );
+        var column = a % 9;
+
+        Grid.setValue( column, line, digit, true );
+        }
+    }
+};
+
+
+
 
 Sudoku.generateMap = function()
 {
@@ -229,11 +262,17 @@ for (var line = 0 ; line < size ; line++)
 
 Sudoku.isMapSolvable = function()
 {
-var gridCopy = deepClone( Grid.getGridValue() );
+var isValid = Solver.isValid( Grid.getGridString() );
 
-var solver = new Solver( gridCopy );
+if ( isValid === false )
+    {
+    return false;
+    }
 
-return solver.solve();
+else
+    {
+    return true;
+    }
 };
 
 
