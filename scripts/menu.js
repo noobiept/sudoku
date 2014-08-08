@@ -19,7 +19,7 @@ var newMap = container.querySelector( '#Menu-newMap' );
 newMap.onclick = function()
     {
     Timer.restart();
-    Sudoku.generateMap();
+    Sudoku.openMap( 'easy' );   //HERE
     };
 
     // reset map

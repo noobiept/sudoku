@@ -6,6 +6,20 @@ function Sudoku()
 }
 
 var ERRORS_HIGHLIGHTED = false;
+var PUZZLES = {};
+
+Sudoku.initPuzzles = function()
+{
+var difficulties = [ 'easy', 'medium', 'hard' ];
+
+for (var a = 0 ; a < difficulties.length ; a++)
+    {
+    var difficulty = difficulties[ a ];
+    var puzzles = G.PRELOAD.getResult( difficulty );
+
+    PUZZLES[ difficulty ] = puzzles.split( '\n' );
+    }
+};
 
 
 /*
@@ -163,9 +177,15 @@ Grid.reset();
 };
 
 
-Sudoku.openMap = function()
+Sudoku.openMap = function( difficulty )
 {
-var map = '38..9...7....15...5297...3...74....3.931.654.2....37...4...7985...95....9...4..76';
+clearMap();
+
+var puzzles = PUZZLES[ difficulty ];
+
+var index = getRandomInt( 0, puzzles.length - 1 );
+
+var map = puzzles[ index ];
 
 
 var isValid = Solver.isValid( map );
@@ -196,67 +216,33 @@ for (var a = 0 ; a < map.length ; a++)
 
 
 
-
-Sudoku.generateMap = function()
-{
-clearMap();
-
-var size = Grid.getSize();
-var positions = [];
-
-for (var line = 0 ; line < size ; line++)
-    {
-    for (var column = 0 ; column < size ; column++)
-        {
-        positions.push({
-                column: column,
-                line: line
-            });
-        }
-    }
-
-var howMany = 25;
-var selectedPositions = severalRandomInts( 0, positions.length - 1, howMany );
-var grid = Grid.getGridValue();
-
-for (var a = 0 ; a < howMany ; a++)
-    {
-    var position = positions[ selectedPositions[ a ] ];
-    var validDigits = getValidDigits( grid, position.column, position.line );
-
-    var index = getRandomInt( 0, validDigits.length - 1 );
-    var digit = validDigits[ index ];
-
-    Grid.setValue( position.column, position.line, digit, true );
-    }
-
-    // check if its valid
-var gridCopy = deepClone( grid );
-var solver = new Solver( gridCopy );
-
-var isValid = solver.solve();   //HERE if its not valid, need to try again
-
-console.log( 'Is valid?', isValid );
-};
-
-
 Sudoku.solveMap = function()
 {
-var size = Grid.getSize();
+var result = Solver.solve( Grid.getGridString() );
 
-var solver = new Solver( Grid.getGridValue() );
-
-var isSolvable = solver.solve();
-
-console.log( 'is solvable?', isSolvable );
-
-for (var line = 0 ; line < size ; line++)
+if ( result.length === 0 )
     {
-    for (var column = 0 ; column < size ; column++)
+    Menu.showMessage( 'Not solvable.' );
+    return;
+    }
+
+var solution = result[ 0 ];
+
+for (var a = 0 ; a < solution.length ; a++)
+    {
+    var digit = parseInt( solution[ a ], 10 );
+
+    if ( !_.isNaN( digit ) )
         {
-        Grid.setValue( column, line, solver.grid[ line ][ column ] );
+       var line = Math.floor( a / 9 );
+        var column = a % 9;
+
+        Grid.setValue( column, line, digit );
         }
     }
+
+
+Menu.showMessage( 'Solved.' );
 };
 
 
