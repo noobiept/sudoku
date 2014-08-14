@@ -25,7 +25,7 @@ G.PRELOAD.on( 'complete', function()
     Timer.init();
 
     Sudoku.initPuzzles();
-    Sudoku.openMap( 'easy' );
+    Sudoku.openMap( Menu.getDifficulty() );
     Timer.start();
     });
 G.PRELOAD.loadManifest( manifest, true );

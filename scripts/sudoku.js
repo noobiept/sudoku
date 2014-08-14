@@ -180,6 +180,7 @@ Grid.reset();
 Sudoku.openMap = function( difficulty )
 {
 clearMap();
+Menu.showMessage( 'New map (' + difficulty + ')' );
 
 var puzzles = PUZZLES[ difficulty ];
 
