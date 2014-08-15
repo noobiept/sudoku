@@ -19,7 +19,7 @@ HTML_ELEMENT.innerHTML = Timer.toString();
 
 Timer.start = function()
 {
-var interval = 500;
+var interval = 1000;
 
 INTERVAL_F = window.setInterval( function()
     {
@@ -47,12 +47,16 @@ Timer.start();
 
 Timer.toString = function()
 {
-return (TIME_PASSED / 1000).toFixed( 1 ) + 's';
+return Utilities.timeToString( TIME_PASSED );
 };
+
+/*
+    Returns the time it has passed so far, in seconds.
+ */
 
 Timer.getTime = function()
 {
-return TIME_PASSED;
+return TIME_PASSED / 1000;
 };
 
 

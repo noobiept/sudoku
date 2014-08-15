@@ -23,6 +23,8 @@ input.addEventListener( 'blur', function( event )
 
     if ( Sudoku.checkIfFinished() )
         {
+        HighScore.add( Sudoku.getCurrentMapDifficulty(), Timer.getTime() );
+
         window.alert( 'You win!' );
         Sudoku.openMap( Menu.getDifficulty() );
         }

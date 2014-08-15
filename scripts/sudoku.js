@@ -8,6 +8,7 @@ function Sudoku()
 var ERRORS_HIGHLIGHTED = false;
 var PUZZLES = {};
 var PREVIOUS_PUZZLE = null;     // when opening a new map/puzzle, make sure we're not opening the same that was previously played
+var CURRENT_MAP_DIFFICULTY = '';
 
 Sudoku.initPuzzles = function()
 {
@@ -183,9 +184,10 @@ Sudoku.openMap = function( difficulty )
 clearMap();
 Menu.showMessage( 'New map (' + difficulty + ')' );
 
+CURRENT_MAP_DIFFICULTY = difficulty;
 var puzzles = PUZZLES[ difficulty ];
 
-var index = getRandomInt( 0, puzzles.length - 1 );
+var index = Utilities.getRandomInt( 0, puzzles.length - 1 );
 
 var map = puzzles[ index ];
 
@@ -300,6 +302,8 @@ var finished = Sudoku.checkIfFinished();
 
 if ( finished === true )
     {
+    HighScore.add( Sudoku.getCurrentMapDifficulty(), Timer.getTime() );
+
     window.alert( 'You win!' );
     Sudoku.openMap( Menu.getDifficulty() );
     }
@@ -308,17 +312,7 @@ if ( finished === true )
 
 Sudoku.isMapSolvable = function()
 {
-var isValid = Solver.isValid( Grid.getGridString() );
-
-if ( isValid === false )
-    {
-    return false;
-    }
-
-else
-    {
-    return true;
-    }
+return Solver.isValid( Grid.getGridString() );
 };
 
 
@@ -414,6 +408,11 @@ console.log( 'Total puzzles:', total );
 console.log( 'Invalid puzzles:', totalInvalid );
 };
 
+
+Sudoku.getCurrentMapDifficulty = function()
+{
+return CURRENT_MAP_DIFFICULTY;
+};
 
 
 

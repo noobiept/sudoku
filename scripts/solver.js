@@ -120,7 +120,7 @@ for (var c2 = 0; c2 < 4; ++c2) { // update # available choices
     } else { // revert
         for (r2 = 0; r2 < 9; ++r2) {
             if (--sr[rr = R[c][r2]] != 0) continue; // update the row status
-            var p = C[rr]
+            var p = C[rr];
             ++sc[p[0]]; ++sc[p[1]]; ++sc[p[2]]; ++sc[p[3]]; // update the count array
         }
     }
@@ -189,10 +189,10 @@ for (var i = 0, dir = 1, cand = 10<<16|0;;) {
         } else cr[i--] = dir = -1; // backtrack
     }
     if (i < 0) break;
-    var y = []
+    var y = [];
     for (var j = 0; j < 81; ++j) y[j] = out[j]
     for (var j = 0; j < i; ++j) r = R[cc[j]][cr[j]], y[Math.floor(r/9)] = r%9 + 1; // the solution array (81 numbers)
-    ret.push(y)
+    ret.push(y);
     if (ret.length >= max_ret) return ret;
     --i; dir = -1; // backtrack
 }

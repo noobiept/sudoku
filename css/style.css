@@ -119,8 +119,12 @@ table
     cursor: pointer;
     }
 
-
 .Menu-difficultySelected
     {
     background-color: rgba(157, 71, 106, 0.45);
+    }
+
+#GridContainer
+    {
+    margin: 20px;
     }

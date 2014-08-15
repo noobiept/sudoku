@@ -34,7 +34,8 @@ for (var line = 0 ; line < size ; line++)
     container.appendChild( row );
     }
 
-document.body.appendChild( container );
+var gridContainer = document.querySelector( '#GridContainer' );
+gridContainer.appendChild( container );
 };
 
 

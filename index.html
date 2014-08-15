@@ -5,11 +5,12 @@
 
     <script type="text/javascript" src="libraries/underscore-min.js"></script>
     <script type="text/javascript" src="libraries/preloadjs-0.4.1.min.js"></script>
+    <script type="text/javascript" src="libraries/utilities.js"></script>
 
     <script type="text/javascript" src="scripts/solver.js"></script>
-    <script type="text/javascript" src="scripts/utilities.js"></script>
     <script type="text/javascript" src="scripts/entry.js"></script>
     <script type="text/javascript" src="scripts/menu.js"></script>
+    <script type="text/javascript" src="scripts/high_score.js"></script>
     <script type="text/javascript" src="scripts/grid.js"></script>
     <script type="text/javascript" src="scripts/timer.js"></script>
     <script type="text/javascript" src="scripts/sudoku.js"></script>
@@ -20,7 +21,6 @@
 <body>
 
 <ul id="Menu">
-    <li>timer: <span id="Menu-timer"></span></li>
     <li><a id="Menu-newMap" class="button">New map</a></li>
     <li><ul id="Menu-difficulty">
         <li data-difficulty="easy">easy</li>
@@ -29,9 +29,20 @@
     </ul></li>
     <li><a id="Menu-resetMap" class="button">Reset map</a></li>
     <li><a id="Menu-validateMap" class="button">confirm so far</a></li>
+    <li>timer: <span id="Menu-timer"></span></li>
     <li><span id="Menu-message"></span></li>
 </ul>
 
+<div id="GridContainer"></div>
+
+<table id="HighScores">
+    <caption>High scores</caption>
+    <tr>
+        <th>easy</th>
+        <th>medium</th>
+        <th>hard</th>
+    </tr>
+</table>
 
 </body>
 </html>
