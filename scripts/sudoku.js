@@ -7,6 +7,7 @@ function Sudoku()
 
 var ERRORS_HIGHLIGHTED = false;
 var PUZZLES = {};
+var PREVIOUS_PUZZLE = null;     // when opening a new map/puzzle, make sure we're not opening the same that was previously played
 
 Sudoku.initPuzzles = function()
 {
@@ -188,6 +189,26 @@ var index = getRandomInt( 0, puzzles.length - 1 );
 
 var map = puzzles[ index ];
 
+    // don't open the same map that was played before
+if ( PREVIOUS_PUZZLE !== null )
+    {
+        // get the next one
+    if ( map === PREVIOUS_PUZZLE )
+        {
+        index++;
+
+        if ( index >= puzzles.length )
+            {
+            index = 0;
+            }
+
+        map = puzzles[ index ];
+        }
+    }
+
+PREVIOUS_PUZZLE = map;
+
+
 var isValid = Solver.isValid( map );
 
 if ( isValid === false )
@@ -357,6 +378,42 @@ for (var line = startLine ; line < endLine ; line++)
 
 return digits;
 }
+
+/*
+    Tests the puzzles to make sure they are all solvable
+ */
+
+Sudoku.testPuzzles = function()
+{
+var difficulties = [ 'easy', 'medium', 'hard' ];
+var total = 0;
+var totalInvalid = 0;
+
+for (var a = 0 ; a < difficulties.length ; a++)
+    {
+    var difficulty = difficulties[ a ];
+    var puzzles = PUZZLES[ difficulty ];
+
+    for (var b = 0 ; b < puzzles.length ; b++)
+        {
+        var puzzle = puzzles[ b ];
+
+        var isValid = Solver.isValid( puzzle );
+
+        if ( !isValid )
+            {
+            console.log( 'invalid -->', 'difficulty:', difficulty, 'line:', b + 1, 'puzzle:', puzzle );
+            totalInvalid++;
+            }
+
+        total++;
+        }
+    }
+
+console.log( 'Total puzzles:', total );
+console.log( 'Invalid puzzles:', totalInvalid );
+};
+
 
 
 
