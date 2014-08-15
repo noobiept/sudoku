@@ -30,13 +30,58 @@ if ( HIGH_SCORE[ difficulty ].length > SAVE_LIMIT )
     }
 
 HighScore.save();
+HighScore.updateTable();
 };
 
 
-HighScore.get = function( difficulty )
+/*
+    Update the html table, with the current high-scores
+ */
+
+HighScore.updateTable = function()
 {
+var table = document.querySelector( '#HighScore' );
 
+    // clear the previous scores
+var previousRows = table.querySelectorAll( 'tr:not(#HighScore-header)' );
+var a;
+var difficulties = [ 'easy', 'medium', 'hard' ];
+
+for (a = 0 ; a < previousRows.length ; a++)
+    {
+    table.removeChild( previousRows[ a ] );
+    }
+
+    // create the new rows, with the updated scores
+for (a = 0 ; a < SAVE_LIMIT ; a++)
+    {
+    var row = document.createElement( 'tr' );
+
+    for (var b = 0 ; b < difficulties.length ; b++)
+        {
+        var difficulty = difficulties[ b ];
+
+        var td = document.createElement( 'td' );
+
+        if ( typeof HIGH_SCORE[ difficulty ] !== 'undefined' &&
+             typeof HIGH_SCORE[ difficulty ][ a ] !== 'undefined' )
+            {
+            td.innerHTML = HIGH_SCORE[ difficulty ][ a ] + 's';
+            }
+
+        else
+            {
+            td.innerHTML = '-';
+            }
+
+
+        row.appendChild( td );
+        }
+
+    table.appendChild( row );
+    }
 };
+
 
 
 HighScore.save = function()

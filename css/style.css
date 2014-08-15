@@ -128,3 +128,23 @@ table
     {
     margin: 20px;
     }
+
+
+    /* High Score */
+
+#HighScore
+    {
+    margin: 60px 20px;
+    text-align: center;
+    }
+
+#HighScore caption
+    {
+    background-color: rgba(157, 128, 83, 0.45);
+    }
+
+#HighScore th
+    {
+
+    min-width: 100px;
+    }

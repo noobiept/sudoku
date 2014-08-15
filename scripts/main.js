@@ -22,6 +22,7 @@ G.PRELOAD.on( 'complete', function()
     Grid.init();
     Solver.init();
     HighScore.load();
+    HighScore.updateTable();
     Menu.init();
     Timer.init();
 
