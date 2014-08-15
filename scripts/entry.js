@@ -20,6 +20,13 @@ input.addEventListener( 'blur', function( event )
     _this.validateInput( event );
 
     Sudoku.removeErrorsHighlight();
+
+    if ( Sudoku.checkIfFinished() )
+        {
+        window.alert( 'You win!' );
+        Sudoku.openMap( Menu.getDifficulty() );
+        }
+
     }, false );
 
 container.appendChild( input );
@@ -44,6 +51,7 @@ Entry.prototype.setValue = function( value )
 {
 this.input.value = value;
 };
+
 
 
 Entry.prototype.setReadOnly = function( yesNo )

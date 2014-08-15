@@ -6,7 +6,6 @@ function Grid()
 }
 
 var GRID = [];          // grid with the entries
-var GRID_VALUE = [];    // grid with just the value
 var GRID_SIZE = 9;
 
 Grid.init = function()
@@ -18,7 +17,7 @@ var container = document.createElement( 'table' );
 for (var line = 0 ; line < size ; line++)
     {
     GRID[ line ] = [];
-    GRID_VALUE[ line ] = [];
+
     var row = document.createElement( 'tr' );
 
     for (var column = 0 ; column < size ; column++)
@@ -28,7 +27,6 @@ for (var line = 0 ; line < size ; line++)
         td.id = 'td' + line + column;
 
         GRID[ line ][ column ] = new Entry( td );
-        GRID_VALUE[ line ][ column ] = 0;
 
         row.appendChild( td );
         }
@@ -95,17 +93,10 @@ if ( typeof readOnly === 'undefined' )
     readOnly = false;
     }
 
-GRID_VALUE[ line ][ column ] = value;
-
 var entry = GRID[ line ][ column ];
 
 entry.setValue( value );
 entry.setReadOnly( readOnly );
-};
-
-Grid.getValue = function( column, line )
-{
-return GRID_VALUE[ line ][ column ];
 };
 
 
@@ -113,12 +104,6 @@ return GRID_VALUE[ line ][ column ];
 Grid.getSize = function()
 {
 return GRID_SIZE;
-};
-
-
-Grid.getGridValue = function()
-{
-return GRID_VALUE;
 };
 
 
@@ -166,8 +151,6 @@ for (var line = 0 ; line < GRID_SIZE ; line++)
         var entry = GRID[ line ][ column ];
 
         entry.reset();
-
-        GRID_VALUE[ line ][ column ] = 0;
         }
     }
 };
@@ -182,7 +165,6 @@ for (var line = 0 ; line < GRID_SIZE ; line++)
 
         if ( !entry.isReadOnly() )
             {
-            GRID_VALUE[ line ][ column ] = 0;
             entry.reset();
             }
         }

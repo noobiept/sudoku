@@ -188,7 +188,6 @@ var index = getRandomInt( 0, puzzles.length - 1 );
 
 var map = puzzles[ index ];
 
-
 var isValid = Solver.isValid( map );
 
 if ( isValid === false )
@@ -213,6 +212,39 @@ for (var a = 0 ; a < map.length ; a++)
         Grid.setValue( column, line, digit, true );
         }
     }
+};
+
+/*
+    Checks if the puzzle is complete and valid.
+ */
+
+Sudoku.checkIfFinished = function()
+{
+var valid = Sudoku.isValidSoFar();
+
+if ( !valid )
+    {
+    return false;
+    }
+
+var size = Grid.getSize();
+
+    // check if there's any empty entry
+for (var column = 0 ; column < size ; column++)
+    {
+    for (var line = 0 ; line < size ; line++)
+        {
+        var entry = Grid.getEntry( column, line );
+
+        if ( _.isNaN( entry.getValue() ) )
+            {
+            return false;
+            }
+        }
+    }
+
+
+return true;
 };
 
 
@@ -243,7 +275,13 @@ for (var a = 0 ; a < solution.length ; a++)
     }
 
 
-Menu.showMessage( 'Solved.' );
+var finished = Sudoku.checkIfFinished();
+
+if ( finished === true )
+    {
+    window.alert( 'You win!' );
+    Sudoku.openMap( Menu.getDifficulty() );
+    }
 };
 
 
