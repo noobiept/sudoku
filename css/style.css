@@ -129,6 +129,19 @@ table
     margin: 20px;
     }
 
+#GridContainer td
+    {
+    position: relative;
+    }
+
+.possibleNumbers
+    {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+    }
+
 
     /* High Score */
 

@@ -3,6 +3,14 @@
 function Entry( container )
 {
 var _this = this;
+
+    // possible numbers //
+var possibleNumbers = document.createElement( 'div' );
+
+possibleNumbers.className = 'possibleNumbers';
+
+
+    // input entry //
 var input = document.createElement( 'input' );
 
 input.type = 'number';
@@ -30,11 +38,45 @@ input.addEventListener( 'blur', function( event )
         }
 
     }, false );
+input.addEventListener( 'keydown', function( event )
+    {
+    var keyCode = event.keyCode;
+    var character = String.fromCharCode( keyCode );
+
+   if ( keyCode >= Utilities.KEY_CODE[ '1' ] && keyCode <= Utilities.KEY_CODE[ '9' ] )
+        {
+        if ( event.altKey )
+            {
+            input.value = '';
+
+            if ( possibleNumbers.innerHTML.length > 4 )
+                {
+                possibleNumbers.innerHTML = '';
+                }
+
+            possibleNumbers.innerHTML = possibleNumbers.innerHTML + character;
+            }
+
+        else
+            {
+            possibleNumbers.innerHTML = '';
+            input.value = character;
+            }
+
+        }
+
+    event.stopPropagation();
+    event.preventDefault();
+    return false;
+
+    }, false );
 
 container.appendChild( input );
+container.appendChild( possibleNumbers );
 
 this.previous_value = '';
 this.input = input;
+this.possible_numbers = possibleNumbers;
 this.container = container;
 this.is_read_only = false;
 }

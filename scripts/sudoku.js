@@ -30,8 +30,14 @@ for (var a = 0 ; a < difficulties.length ; a++)
     To be valid, each column/line/sub-grid has to have only of of the digits
  */
 
-Sudoku.isValidSoFar = function()
+Sudoku.isValidSoFar = function( highlight )
 {
+if ( typeof highlight === 'undefined' )
+    {
+    highlight = true;
+    }
+
+
 var size = 9;
 var isValid = true;
 
@@ -59,11 +65,20 @@ for (column = 0 ; column < size ; column++)
             {
             if ( digitsFound[ value ] )
                 {
-                    // mark the previous entry as well
-                digitsFound[ value ].setValid( false );
-                entry.setValid( false );
+                if ( highlight )
+                    {
+                        // mark the previous entry as well
+                    digitsFound[ value ].setValid( false );
+                    entry.setValid( false );
 
-                isValid = false;
+                    isValid = false;
+                    }
+
+                else
+                    {
+                        // if we don't need to highlight we can return the moment we figure out its not valid
+                    return false;
+                    }
                 }
 
             digitsFound[ value ] = entry;
@@ -86,10 +101,18 @@ for (line = 0 ; line < size ; line++)
             {
             if ( digitsFound[ value ] )
                 {
-                digitsFound[ value ].setValid( false );
-                entry.setValid( false );
+                if ( highlight )
+                    {
+                    digitsFound[ value ].setValid( false );
+                    entry.setValid( false );
 
-                isValid = false;
+                    isValid = false;
+                    }
+
+                else
+                    {
+                    return false;
+                    }
                 }
 
             digitsFound[ value ] = entry;
@@ -116,10 +139,18 @@ while( subGrid !== null )
             {
             if ( digitsFound[ value ] )
                 {
-                digitsFound[ value ].setValid( false );
-                entry.setValid( false );
+                if ( highlight )
+                    {
+                    digitsFound[ value ].setValid( false );
+                    entry.setValid( false );
 
-                isValid = false;
+                    isValid = false;
+                    }
+
+                else
+                    {
+                    return false;
+                    }
                 }
 
             digitsFound[ value ] = entry;
@@ -243,7 +274,7 @@ for (var a = 0 ; a < map.length ; a++)
 
 Sudoku.checkIfFinished = function()
 {
-var valid = Sudoku.isValidSoFar();
+var valid = Sudoku.isValidSoFar( false );
 
 if ( !valid )
     {
