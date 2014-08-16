@@ -43,6 +43,12 @@ input.addEventListener( 'keydown', function( event )
     var keyCode = event.keyCode;
     var character = String.fromCharCode( keyCode );
 
+        // be able to use the functions keys (like f5 to refresh)
+    if ( keyCode >= Utilities.KEY_CODE.f1 && keyCode <= Utilities.KEY_CODE.f12 )
+        {
+        return;
+        }
+
    if ( keyCode >= Utilities.KEY_CODE[ '1' ] && keyCode <= Utilities.KEY_CODE[ '9' ] )
         {
         if ( event.altKey )
@@ -54,7 +60,17 @@ input.addEventListener( 'keydown', function( event )
                 possibleNumbers.innerHTML = '';
                 }
 
-            possibleNumbers.innerHTML = possibleNumbers.innerHTML + character;
+            var currentText = possibleNumbers.innerHTML;
+
+            if ( currentText.indexOf( character ) >= 0 )
+                {
+                possibleNumbers.innerHTML = currentText.replace( character, '' );
+                }
+
+            else
+                {
+                possibleNumbers.innerHTML = currentText + character;
+                }
             }
 
         else
