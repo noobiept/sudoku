@@ -1,0 +1,17 @@
+{
+    "resultingFolder": "sudoku",
+    "basePath": "..",
+    "files":
+        [
+            "css/",
+            "libraries/",
+            "maps/",
+            "manifest.json"
+        ],
+    "extensions":
+        [
+            ".css",
+            ".js",
+            ".txt"
+        ]
+}

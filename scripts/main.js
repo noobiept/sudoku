@@ -7,12 +7,14 @@ var G = {
     PRELOAD: null
 };
 
+var BASE_URL = '';
+
 window.onload = function()
 {
 var manifest = [
-        { id: 'easy', src: 'maps/easy.txt' },
-        { id: 'medium', src: 'maps/medium.txt' },
-        { id: 'hard', src: 'maps/hard.txt' }
+        { id: 'easy', src: BASE_URL + 'maps/easy.txt' },
+        { id: 'medium', src: BASE_URL + 'maps/medium.txt' },
+        { id: 'hard', src: BASE_URL + 'maps/hard.txt' }
     ];
 
 G.PRELOAD = new createjs.LoadQueue();
