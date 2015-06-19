@@ -41,6 +41,14 @@ input.addEventListener( 'blur', function( event )
 input.addEventListener( 'keydown', function( event )
     {
     var keyCode = event.keyCode;
+
+        // allow the numbers in the numpad to work as well
+    if ( keyCode >= Utilities.KEY_CODE.numpad1 && keyCode <= Utilities.KEY_CODE.numpad9 )
+        {
+            // by subtracting this amount, the key code will be the equivalent of the keyboard numbers (for example Utilities.KEY_CODE.numpad1 === Utilities.KEY_CODE[ '1' ])
+        keyCode -= 48;
+        }
+
     var character = String.fromCharCode( keyCode );
 
         // be able to use the functions keys (like f5 to refresh)

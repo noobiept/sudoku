@@ -321,7 +321,7 @@ for (var a = 0 ; a < solution.length ; a++)
 
     if ( !_.isNaN( digit ) )
         {
-       var line = Math.floor( a / 9 );
+        var line = Math.floor( a / 9 );
         var column = a % 9;
 
         Grid.setValue( column, line, digit );
