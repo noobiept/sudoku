@@ -86,13 +86,13 @@ for (a = 0 ; a < SAVE_LIMIT ; a++)
 
 HighScore.save = function()
 {
-Utilities.saveObject( 'high_score', HIGH_SCORE );
+Utilities.saveObject( 'sudoku_high_score', HIGH_SCORE );
 };
 
 
 HighScore.load = function()
 {
-var scoreObj = Utilities.getObject( 'high_score' );
+var scoreObj = Utilities.getObject( 'sudoku_high_score' );
 
 if ( scoreObj !== null )
     {
