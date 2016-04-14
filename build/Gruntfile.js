@@ -23,6 +23,7 @@ grunt.initConfig({
                 expand: true,
                 cwd: '../',
                 src: [
+                    'images/*.png',
                     'libraries/**',
                     'maps/**'
                 ],
